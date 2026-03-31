@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유사연애 체크리스트 — 피노</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+ 
+  :root {
+    --bg: #FDFAF6;
+    --surface: #FFFFFF;
+    --ink: #1C1A17;
+    --ink-muted: #6B6560;
+    --accent: #C9775A;
+    --accent-soft: #F2E8E3;
+    --accent2: #7C9E8F;
+    --accent2-soft: #E8F1EE;
+    --gold: #C4A882;
+    --line: #EDE8E2;
+    --serif: 'Noto Serif KR', serif;
+    --sans: 'Noto Sans KR', sans-serif;
+  }
+ 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+ 
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 72px 48px 120px;
+  }
+ 
+  /* HERO */
+  .hero {
+    margin-bottom: 56px;
+    border-bottom: 1.5px solid var(--line);
+    padding-bottom: 48px;
+  }
+ 
+  .hero-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+ 
+  .hero-title {
+    font-family: var(--serif);
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 16px;
+    word-break: keep-all;
+  }
+ 
+  .hero-title em { color: var(--accent); font-style: normal; }
+ 
+  .hero-sub {
+    font-size: 14px;
+    color: var(--ink-muted);
+    font-weight: 300;
+  }
+ 
+  /* INTRO BOX */
+  .intro-box {
+    background: var(--ink);
+    color: #F5F0EA;
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin-bottom: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .intro-box::before {
+    content: '❝';
+    position: absolute;
+    top: -10px; right: 24px;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    font-family: var(--serif);
+    line-height: 1;
+  }
+ 
+  .intro-box p {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.9;
+    font-weight: 300;
+  }
+ 
+  .intro-box strong { color: #E8C9B8; font-weight: 600; }
+ 
+  .pino-sig {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+  }
+ 
+  /* NAV CARDS */
+  .nav-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 72px;
+  }
+ 
+  .nav-card {
+    background: var(--surface);
+    border: 1.5px solid var(--line);
+    border-radius: 20px;
+    padding: 32px 28px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .nav-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 20px 20px 0 0;
+  }
+ 
+  .nav-card.doing::before { background: var(--accent); }
+  .nav-card.done::before { background: var(--accent2); }
+ 
+  .nav-card:hover {
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+ 
+  .nav-card-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+ 
+  .nav-card.doing .nav-card-num { color: var(--accent); }
+  .nav-card.done .nav-card-num { color: var(--accent2); }
+ 
+  .nav-card-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 10px;
+    word-break: keep-all;
+  }
+ 
+  .nav-card-desc {
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    word-break: keep-all;
+  }
+ 
+  .nav-card-arrow {
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+ 
+  .nav-card.doing .nav-card-arrow { color: var(--accent); }
+  .nav-card.done .nav-card-arrow { color: var(--accent2); }
+ 
+  /* SECTION */
+  .checklist-section {
+    margin-bottom: 80px;
+    scroll-margin-top: 40px;
+  }
+ 
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+ 
+  .section-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+ 
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+ 
+  .section-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+    word-break: keep-all;
+  }
+ 
+  .section-title em { color: var(--accent); font-style: normal; }
+  .section-title.green em { color: var(--accent2); }
+ 
+  .section-desc {
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-bottom: 32px;
+    line-height: 1.7;
+    word-break: keep-all;
+  }
+ 
+  /* CHECKLIST */
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+ 
+  .check-item {
+    background: var(--surface);
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: all 0.15s;
+    user-select: none;
+  }
+ 
+  .check-item:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+ 
+  .check-item.checked {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+ 
+  .check-item.checked.green-check {
+    border-color: var(--accent2);
+    background: var(--accent2-soft);
+  }
+ 
+  .check-item.green-check:hover {
+    border-color: var(--accent2);
+    background: var(--accent2-soft);
+  }
+ 
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--line);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    transition: all 0.15s;
+    font-size: 13px;
+    color: transparent;
+  }
+ 
+  .check-item.checked .check-box {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+ 
+  .check-item.checked.green-check .check-box {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    color: white;
+  }
+ 
+  .check-text {
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.7;
+    word-break: keep-all;
+  }
+ 
+  .check-item.checked .check-text {
+    color: var(--ink);
+  }
+ 
+  /* RESULT */
+  .result-box {
+    border-radius: 20px;
+    padding: 36px 40px;
+    display: none;
+    margin-top: 8px;
+  }
+ 
+  .result-box.visible { display: block; }
+ 
+  .result-box.red-result {
+    background: var(--ink);
+    color: #F5F0EA;
+  }
+ 
+  .result-box.green-result {
+    background: var(--ink);
+    color: #F5F0EA;
+  }
+ 
+  .result-score {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+ 
+  .result-box.red-result .result-score { color: #E8C9B8; }
+  .result-box.green-result .result-score { color: #B8D4CC; }
+ 
+  .result-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.5;
+  }
+ 
+  .result-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 14px;
+    word-break: keep-all;
+  }
+ 
+  .result-box.red-result .result-title { color: #E8C9B8; }
+  .result-box.green-result .result-title { color: #B8D4CC; }
+ 
+  .result-desc {
+    font-size: 14px;
+    line-height: 1.9;
+    color: rgba(245,240,234,0.8);
+    word-break: keep-all;
+    margin-bottom: 24px;
+  }
+ 
+  .result-insight {
+    background: rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+ 
+  .result-insight p {
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.8;
+    color: #F5F0EA;
+    word-break: keep-all;
+  }
+ 
+  .result-insight strong { color: #E8C9B8; }
+ 
+  .reset-btn {
+    margin-top: 20px;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    font-family: var(--sans);
+  }
+ 
+  .reset-btn:hover { color: rgba(255,255,255,0.7); }
+ 
+  /* SCORE BAR */
+  .score-bar-wrap {
+    margin: 16px 0 20px;
+  }
+ 
+  .score-bar-bg {
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+ 
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.4s ease;
+  }
+ 
+  .red-result .score-bar-fill { background: #E8C9B8; }
+  .green-result .score-bar-fill { background: #B8D4CC; }
+ 
+  /* DISCLAIMER */
+  .disclaimer {
+    font-size: 12.5px;
+    color: var(--ink-muted);
+    line-height: 1.85;
+    padding: 24px 28px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 48px;
+    word-break: keep-all;
+  }
+ 
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    margin-top: 72px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+ 
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    line-height: 2;
+  }
+ 
+  .footer-brand strong { color: var(--accent); }
+ 
+  @media (max-width: 600px) {
+    .page { padding: 40px 24px 80px; }
+    .hero-title { font-size: 28px; }
+    .nav-grid { grid-template-columns: 1fr; }
+    .intro-box { padding: 28px 24px; }
+    .result-box { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+ 
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-label">💬 유사연애 자가진단</div>
+    <h1 class="hero-title">나, 지금 <em>유사연애</em><br>하고 있는 걸까?</h1>
+    <p class="hero-sub">체크리스트로 지금 내 관계를 확인해봐 · by 피노</p>
+  </div>
+ 
+  <!-- INTRO -->
+  <div class="intro-box">
+    <p>
+      연애는 귀찮은데, 연락할 사람은 있어야 해.<br>
+      사귀지도 않고, 썸도 아닌데 매일 연락하는 그 관계.<br><br>
+      <strong>설레는 건지, 그냥 허전한 건지</strong> 헷갈린다면<br>
+      지금 이 체크리스트가 답을 줄 거야.
+    </p>
+    <div class="pino-sig">— 피노 @its_.pino</div>
+  </div>
+ 
+  <!-- NAV -->
+  <div class="nav-grid">
+    <div class="nav-card doing" onclick="scrollTo('doing')" style="cursor:pointer;">
+      <div class="nav-card-num">체크리스트 01</div>
+      <div class="nav-card-title">내가 유사연애를<br>하고 있다면?</div>
+      <div class="nav-card-desc">내가 누군가에게 유사연애를 하고 있는지 확인해봐</div>
+      <div class="nav-card-arrow">→ 바로 확인하기</div>
+    </div>
+    <div class="nav-card done" onclick="scrollTo('done')" style="cursor:pointer;">
+      <div class="nav-card-num">체크리스트 02</div>
+      <div class="nav-card-title">내가 유사연애를<br>당하고 있나..?</div>
+      <div class="nav-card-desc">상대방이 나를 유사연애 상대로 보는 건 아닌지 확인해봐</div>
+      <div class="nav-card-arrow">→ 바로 확인하기</div>
+    </div>
+  </div>
+ 
+  <!-- SECTION 1: 하고 있다면 -->
+  <div class="checklist-section" id="doing">
+    <div class="section-header">
+      <span class="section-tag">체크리스트 01</span>
+      <div class="section-line"></div>
+    </div>
+    <h2 class="section-title">내가 유사연애를 <em>하고 있다면?</em></h2>
+    <p class="section-desc">해당되는 항목을 모두 선택해봐. 결과는 자동으로 나와.</p>
+ 
+    <div class="checklist" id="list-doing">
+      <div class="check-item" onclick="toggle(this, 'doing')">
+        <div class="check-box">✓</div>
+        <div class="check-text">사귀고 싶은 마음은 없는데, 연락이 없으면 허전하다</div>
+      </div>
+      <div class="check-item" onclick="toggle(this, 'doing')">
+        <div class="check-box">✓</div>
+        <div class="check-text">상대가 다른 사람과 가까워지면 기분이 나빠진다</div>
+      </div>
+      <div class="check-item" onclick="toggle(this, 'doing')">
+        <div class="check-box">✓</div>
+        <div class="check-text">이 사람이 좋은 건지, 그냥 익숙한 건지 잘 모르겠다</div>
+      </div>
+      <div class="check-item" onclick="toggle(this, 'doing')">
+        <div class="check-box">✓</div>
+        <div class="check-text">관계를 정의하고 싶지 않다. 지금이 편하니까.</div>
+      </div>
+      <div class="check-item" onclick="toggle(this, 'doing')">
+        <div class="check-box">✓</div>
+        <div class="check-text">진지하게 만나자고 하면 부담스러울 것 같다</div>
+      </div>
+      <div class="check-item" onclick="toggle(this, 'doing')">
+        <div class="check-box">✓</div>
+        <div class="check-text">이 사람 말고 더 좋은 사람이 나타나면 떠날 것 같다</div>
+      </div>
+      <div class="check-item" onclick="toggle(this, 'doing')">
+        <div class="check-box">✓</div>
+        <div class="check-text">설렘보다는 안정감 때문에 연락하는 것 같다</div>
+      </div>
+      <div class="check-item" onclick="toggle(this, 'doing')">
+        <div class="check-box">✓</div>
+        <div class="check-text">상대의 감정을 알면서도 적당히 거리를 유지하고 있다</div>
+      </div>
+    </div>
+ 
+    <!-- RESULT 1 -->
+    <div class="result-box red-result" id="result-doing">
+      <div class="result-label">진단 결과</div>
+      <div class="result-score" id="score-doing">0 / 8</div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-bg">
+          <div class="score-bar-fill" id="bar-doing" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="result-title" id="title-doing"></div>
+      <div class="result-desc" id="desc-doing"></div>
+      <div class="result-insight" id="insight-doing"></div>
+      <button class="reset-btn" onclick="reset('doing')">↺ 다시 체크하기</button>
+    </div>
+  </div>
+ 
+  <!-- SECTION 2: 당하고 있나 -->
+  <div class="checklist-section" id="done">
+    <div class="section-header">
+      <span class="section-tag">체크리스트 02</span>
+      <div class="section-line"></div>
+    </div>
+    <h2 class="section-title green">내가 유사연애를 <em>당하고 있나..?</em></h2>
+    <p class="section-desc">상대방의 행동을 떠올리며 체크해봐.</p>
+ 
+    <div class="checklist" id="list-done">
+      <div class="check-item green-check" onclick="toggle(this, 'done')">
+        <div class="check-box">✓</div>
+        <div class="check-text">연락은 자주 하는데 만남은 항상 흐지부지된다</div>
+      </div>
+      <div class="check-item green-check" onclick="toggle(this, 'done')">
+        <div class="check-box">✓</div>
+        <div class="check-text">새벽에 연락이 오거나, 심심할 때만 연락하는 것 같다</div>
+      </div>
+      <div class="check-item green-check" onclick="toggle(this, 'done')">
+        <div class="check-box">✓</div>
+        <div class="check-text">내가 감정을 표현하면 갑자기 거리를 둔다</div>
+      </div>
+      <div class="check-item green-check" onclick="toggle(this, 'done')">
+        <div class="check-box">✓</div>
+        <div class="check-text">관계를 정의하려 하면 "그냥 편하게 지내자"는 말이 돌아온다</div>
+      </div>
+      <div class="check-item green-check" onclick="toggle(this, 'done')">
+        <div class="check-box">✓</div>
+        <div class="check-text">나는 설레는데, 상대는 늘 여유 있어 보인다</div>
+      </div>
+      <div class="check-item green-check" onclick="toggle(this, 'done')">
+        <div class="check-box">✓</div>
+        <div class="check-text">대화는 주로 상대 얘기 위주고, 내 감정엔 별 반응이 없다</div>
+      </div>
+      <div class="check-item green-check" onclick="toggle(this, 'done')">
+        <div class="check-box">✓</div>
+        <div class="check-text">내가 좀 무심하면 갑자기 연락이 오고, 반응하면 또 뜸해진다</div>
+      </div>
+      <div class="check-item green-check" onclick="toggle(this, 'done')">
+        <div class="check-box">✓</div>
+        <div class="check-text">이 관계가 발전하고 있는 건지 아닌지 도무지 모르겠다</div>
+      </div>
+    </div>
+ 
+    <!-- RESULT 2 -->
+    <div class="result-box green-result" id="result-done">
+      <div class="result-label">진단 결과</div>
+      <div class="result-score" id="score-done">0 / 8</div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-bg">
+          <div class="score-bar-fill" id="bar-done" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="result-title" id="title-done"></div>
+      <div class="result-desc" id="desc-done"></div>
+      <div class="result-insight" id="insight-done"></div>
+      <button class="reset-btn" onclick="reset('done')">↺ 다시 체크하기</button>
+    </div>
+  </div>
+ 
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    ※ 이 체크리스트는 100% 정확한 심리 진단이 아니에요.<br>연애 상황은 사람마다, 맥락마다 달라서 점수가 전부를 말해주진 않습니다.<br>다만 지금 내 관계를 한 번쯤 돌아보는 계기가 됐으면 해요.<br>결국 나를 가장 잘 알아야 되는 건 나 자신이니까.
+  </div>
+ 
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">
+      끌리는 대로 말고, 제대로 — <strong>피노 @its_.pino</strong><br>
+      © 2026 Dear Soul Map · 피노 @its.pino<br>
+      이 콘텐츠의 무단 복제 및 재배포를 금지합니다.
+    </div>
+  </div>
+ 
+</div>
+ 
+<script>
+  const results = {
+    doing: [
+      {
+        min: 0, max: 2,
+        title: "유사연애보다는 자연스러운 관계야",
+        desc: "지금 이 관계, 꽤 건강한 편이야. 감정의 방향이 비교적 명확하고, 상대를 도구처럼 쓰고 있지 않아. 근데 가끔 점검은 필요해.",
+        insight: "<p>감정이 명확할수록 관계는 단순해져. <strong>설레면 표현하고, 아니면 정리하는 것.</strong> 그게 서로에게 제일 깔끔해.</p>"
+      },
+      {
+        min: 3, max: 5,
+        title: "유사연애 초입에 있을 수 있어",
+        desc: "완전한 유사연애는 아니지만, 경계가 조금씩 흐려지고 있어. 지금 이 관계, 진짜 원하는 게 뭔지 한 번은 생각해봐야 해.",
+        insight: "<p><strong>\"허전해서 붙잡는 건지, 진짜 좋아서 붙잡는 건지\"</strong> — 이 질문에 바로 답이 안 나온다면, 그게 이미 신호야.</p>"
+      },
+      {
+        min: 6, max: 8,
+        title: "유사연애 중이야. 그것도 꽤 깊이.",
+        desc: "솔직하게 말하면, 지금 상대방을 감정의 채움 도구로 쓰고 있을 가능성이 높아. 나쁜 사람이라는 게 아니야. 근데 이 상태가 길어지면 양쪽 다 손해야.",
+        insight: "<p>유사연애는 진통제야. <strong>아픔을 없애는 게 아니라 그냥 못 느끼게 하는 것.</strong> 진짜 감정이 올 자리를 막고 있을 수 있어.</p>"
+      }
+    ],
+    done: [
+      {
+        min: 0, max: 2,
+        title: "지금 관계, 비교적 건강해 보여",
+        desc: "상대의 행동에서 큰 이상 신호는 없어. 물론 100%는 없지만, 지금은 너무 걱정 안 해도 될 것 같아.",
+        insight: "<p>좋은 관계는 <strong>에너지가 한쪽으로만 쏠리지 않아.</strong> 지금처럼 균형 있게 가는 게 맞아.</p>"
+      },
+      {
+        min: 3, max: 5,
+        title: "애매한 신호들이 보여. 한 번은 짚어봐야 해.",
+        desc: "몇 가지 패턴이 걸려. 지금 당장 결론 내리기보다, 이 관계에서 내가 일방적으로 더 많이 주고 있는 건 아닌지 체크해봐.",
+        insight: "<p><strong>\"나는 설레는데 상대는 여유 있어 보인다\"</strong> — 이 온도 차이가 느껴진다면, 감정의 무게 중심이 어디 있는지 한 번쯤 봐야 해.</p>"
+      },
+      {
+        min: 6, max: 8,
+        title: "유사연애 당하고 있을 가능성 높아",
+        desc: "상대방이 너를 감정의 채움 도구로 쓰고 있을 가능성이 높아. 연락은 오는데 만남은 없고, 내 감정엔 무감각하고. 이건 관심이 아니야.",
+        insight: "<p>좋아하면 움직여. <strong>바쁜 사람도 보고 싶으면 시간 내거든.</strong> 움직이지 않는 사람한테 네 감정 낭비하지 마.</p>"
+      }
+    ]
+  };
+ 
+  function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+ 
+  function toggle(el, type) {
+    el.classList.toggle('checked');
+    updateResult(type);
+  }
+ 
+  function updateResult(type) {
+    const items = document.querySelectorAll(`#list-${type} .check-item.checked`);
+    const count = items.length;
+    const total = document.querySelectorAll(`#list-${type} .check-item`).length;
+ 
+    document.getElementById(`score-${type}`).textContent = `${count} / ${total}`;
+    document.getElementById(`bar-${type}`).style.width = `${(count / total) * 100}%`;
+ 
+    const resultBox = document.getElementById(`result-${type}`);
+    const data = results[type];
+    let chosen = data[0];
+    for (const r of data) {
+      if (count >= r.min && count <= r.max) { chosen = r; break; }
+    }
+ 
+    document.getElementById(`title-${type}`).textContent = chosen.title;
+    document.getElementById(`desc-${type}`).textContent = chosen.desc;
+    document.getElementById(`insight-${type}`).innerHTML = chosen.insight;
+ 
+    resultBox.classList.add('visible');
+  }
+ 
+  function reset(type) {
+    document.querySelectorAll(`#list-${type} .check-item`).forEach(el => el.classList.remove('checked'));
+    document.getElementById(`result-${type}`).classList.remove('visible');
+  }
+</script>
+</body>
+</html>
