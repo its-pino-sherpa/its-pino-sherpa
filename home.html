@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>대표님 페이지</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* 상단 바 */
+    .navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      background: white;
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    /* 메뉴 */
+    .menu {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+
+    .menu a:hover {
+      color: #007bff;
+    }
+
+    /* 콘텐츠 영역 */
+    .container {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .card {
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      width: 300px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 상단 이름 -->
+  <div class="navbar">
+    <h1>대표님</h1>
+  </div>
+
+  <!-- 메뉴 -->
+  <div class="menu">
+    <a href="pino_attraction_traits.html">매력 특징</a>
+    <a href="pino_attraction_psychology.html">매력 심리</a>
+    <a href="yusa_checklist.html">체크리스트</a>
+  </div>
+
+  <!-- 메인 -->
+  <div class="container">
+    <h2>콘텐츠</h2>
+
+    <div class="card">
+      <h3>매력 높은 사람의 특징</h3>
+      <a href="pino_attraction_traits.html">보러가기 →</a>
+    </div>
+
+    <div class="card">
+      <h3>매력의 심리</h3>
+      <a href="pino_attraction_psychology.html">보러가기 →</a>
+    </div>
+
+    <div class="card">
+      <h3>체크리스트</h3>
+      <a href="yusa_checklist.html">보러가기 →</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
