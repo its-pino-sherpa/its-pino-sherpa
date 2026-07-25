@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이 사람, 진짜 애틋한 사람인지 확인하는 체크리스트 — 피노</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #FDFAF6;
+    --surface: #FFFFFF;
+    --ink: #1C1A17;
+    --ink-muted: #6B6560;
+    --accent: #C9775A;
+    --accent-soft: #F2E8E3;
+    --accent2: #7C9E8F;
+    --accent2-soft: #E8F1EE;
+    --gold: #C4A882;
+    --line: #EDE8E2;
+    --serif: 'Noto Serif KR', serif;
+    --sans: 'Noto Sans KR', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 72px 48px 120px;
+  }
+
+  /* HERO */
+  .hero {
+    margin-bottom: 64px;
+    border-bottom: 1.5px solid var(--line);
+    padding-bottom: 48px;
+  }
+
+  .hero-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 16px;
+    word-break: keep-all;
+  }
+
+  .hero-title em { color: var(--accent); font-style: normal; }
+
+  .hero-sub {
+    font-size: 14px;
+    color: var(--ink-muted);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  /* INTRO BOX */
+  .intro-box {
+    background: var(--ink);
+    color: #F5F0EA;
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin-bottom: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .intro-box::before {
+    content: '❝';
+    position: absolute;
+    top: -10px; right: 24px;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    font-family: var(--serif);
+    line-height: 1;
+  }
+
+  .intro-box p {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.9;
+    font-weight: 300;
+  }
+
+  .intro-box strong { color: #E8C9B8; font-weight: 600; }
+
+  .pino-sig {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+  }
+
+  /* CHECKLIST INTRO */
+  .checklist-intro {
+    margin-bottom: 36px;
+    padding: 20px 24px;
+    background: var(--accent2-soft);
+    border-radius: 12px;
+    border: 1px solid #C4DDD7;
+  }
+
+  .checklist-intro-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent2);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+
+  .checklist-intro-desc {
+    font-size: 13.5px;
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .section-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .section-divider {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* CATEGORY */
+  .category {
+    margin-bottom: 48px;
+  }
+
+  /* CHECK ITEM */
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .check-item {
+    background: var(--surface);
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: all 0.15s;
+    user-select: none;
+  }
+
+  .check-item:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .check-item.checked {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--line);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    transition: all 0.15s;
+    font-size: 13px;
+    color: transparent;
+  }
+
+  .check-item.checked .check-box {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .check-content { flex: 1; }
+
+  .check-text {
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.7;
+    word-break: keep-all;
+    font-weight: 500;
+  }
+
+  .check-sub {
+    font-size: 12.5px;
+    color: var(--ink-muted);
+    line-height: 1.65;
+    margin-top: 4px;
+    word-break: keep-all;
+  }
+
+  /* WHY BLOCK for category explanation */
+  .why-block {
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 20px;
+  }
+
+  .why-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .why-text {
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.8;
+    word-break: keep-all;
+  }
+
+  .why-text strong { color: var(--accent); }
+
+  .theory-pill {
+    display: inline-block;
+    background: var(--accent2-soft);
+    color: var(--accent2);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin: 6px 4px 0 0;
+    letter-spacing: 0.04em;
+  }
+
+  /* SCORE */
+  .score-wrap {
+    background: var(--surface);
+    border: 1.5px solid var(--line);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin-top: 48px;
+  }
+
+  .score-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+  }
+
+  .score-display {
+    font-family: var(--serif);
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .score-total {
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-bottom: 20px;
+  }
+
+  .score-bar-bg {
+    height: 8px;
+    background: var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .score-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .result-box { display: none; }
+  .result-box.visible { display: block; }
+
+  .result-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+
+  .result-desc {
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.9;
+    margin-bottom: 20px;
+    word-break: keep-all;
+  }
+
+  .result-insight {
+    padding: 18px 22px;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    border-radius: 0 12px 12px 0;
+  }
+
+  .result-insight p {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.8;
+    word-break: keep-all;
+  }
+
+  .result-insight strong { color: var(--accent); }
+
+  .reset-btn {
+    margin-top: 20px;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    font-family: var(--sans);
+  }
+
+  .reset-btn:hover { color: var(--accent); }
+
+  /* SUMMARY */
+  .summary {
+    background: var(--ink);
+    border-radius: 24px;
+    padding: 52px 48px;
+    margin-top: 64px;
+    color: #F5F0EA;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .summary::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(201,119,90,0.12);
+  }
+
+  .summary-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .summary-title {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 28px;
+    word-break: keep-all;
+  }
+
+  .summary-title em { color: #E8C9B8; font-style: normal; }
+
+  .conclusion {
+    background: rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 28px 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .conclusion-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .conclusion p {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.8;
+    color: #F5F0EA;
+    word-break: keep-all;
+  }
+
+  .conclusion strong { color: #E8C9B8; }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    font-size: 12.5px;
+    color: var(--ink-muted);
+    line-height: 1.85;
+    padding: 24px 28px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-top: 48px;
+    word-break: keep-all;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    margin-top: 72px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    line-height: 2;
+  }
+
+  .footer-brand strong { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .page { padding: 40px 24px 80px; }
+    .hero-title { font-size: 26px; }
+    .intro-box { padding: 28px 24px; }
+    .score-wrap { padding: 24px 20px; }
+    .summary { padding: 40px 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-label">💌 속마음 체크리스트</div>
+    <h1 class="hero-title">이 사람, <em>진짜 애틋한</em><br>사람이 맞을까요?</h1>
+    <p class="hero-sub">놓치면 땅을 치고 후회하는 사람 구분법 · by 피노</p>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-box">
+    <p>
+      설레는 사람은 많아요.<br>
+      근데 애틋해지는 사람은 드물어요.<br><br>
+      설렘은 <strong>도파민</strong>이 만들지만<br>
+      애틋함은 <strong>옥시토신</strong>이 만들거든요.<br><br>
+      지금 내 감정, 어디까지 왔는지 확인해봐요.
+    </p>
+    <div class="pino-sig">— 피노 @its_.pino</div>
+  </div>
+
+  <!-- CHECKLIST INTRO -->
+  <div class="checklist-intro">
+    <div class="checklist-intro-label">✅ 체크리스트</div>
+    <p class="checklist-intro-desc">해당되는 항목을 눌러서 체크해봐요. 결과는 자동으로 나와요.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="category">
+    <div class="section-header">
+      <span class="section-num">01 · 빙구미에 웃는다</span>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="why-block">
+      <div class="why-label">왜 중요하냐면</div>
+      <div class="why-text">같은 행동인데 다른 사람이 하면 정 떨어지고, 이 사람이 하면 귀엽게 느껴지는 것. 이건 뇌가 이 사람을 <strong>예외로 분류</strong>했다는 신호예요.</div>
+      <span class="theory-pill">선택적 관용</span>
+    </div>
+
+    <div class="checklist" id="list-1">
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">허당 같은 실수를 해도 짜증보다 웃음이 먼저 난다</div>
+          <div class="check-sub">다른 사람이 똑같이 했으면 답답했을 텐데, 이 사람은 그냥 귀엽다</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">그 사람 특유의 어설픈 습관이 떠오르면 저절로 피식 웃는다</div>
+          <div class="check-sub">의식하지 않아도 표정이 먼저 풀린다</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">단점이 단점으로 안 느껴지고 그 사람만의 특징처럼 느껴진다</div>
+          <div class="check-sub">고쳐야 할 것보다 지켜주고 싶은 것에 가깝다</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="category">
+    <div class="section-header">
+      <span class="section-num">02 · 같이 있으면 블랙홀에 빠진다</span>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="why-block">
+      <div class="why-label">왜 중요하냐면</div>
+      <div class="why-text">특별한 걸 안 해도 몰입되는 상태. 심리학에서는 이걸 <strong>몰입 상태</strong>라고 해요. 뇌가 시간 감각을 처리하는 자원을 이 사람한테 전부 쓰고 있다는 뜻이에요.</div>
+      <span class="theory-pill">몰입 이론</span>
+    </div>
+
+    <div class="checklist" id="list-2">
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">딱히 뭘 하는 것도 아닌데 정신 차려보면 몇 시간이 사라져 있다</div>
+          <div class="check-sub">별 시덥지않은 얘기인데 웃음이 넘치고, 광대가 아프다</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">헤어질 시간이 다가오면 아쉬운 마음이 먼저 든다</div>
+          <div class="check-sub">아직 하고 싶은 얘기, 하고 싶은 게 남아있는 느낌이다</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">다른 약속보다 이 사람과의 시간이 항상 더 빨리 지나간다</div>
+          <div class="check-sub">체감 시간이 유독 이 사람 앞에서만 짧다</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="category">
+    <div class="section-header">
+      <span class="section-num">03 · 이상한 연민, 애틋함이 생긴다</span>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="why-block">
+      <div class="why-label">왜 중요하냐면 — 제일 핵심이에요</div>
+      <div class="why-text">불쌍해서 생기는 동정이 아니라, 그 사람의 <strong>약한 부분까지 품고 싶어지는 감정</strong>이에요. 이건 애착 호르몬인 옥시토신이 만드는 거라, 단순한 호감보다 훨씬 깊은 단계예요.</div>
+      <span class="theory-pill">옥시토신 반응</span>
+      <span class="theory-pill">애착 형성 신호</span>
+    </div>
+
+    <div class="checklist" id="list-3">
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">그 사람의 서툰 모습, 약한 부분을 떠올리면 마음이 저릿하다</div>
+          <div class="check-sub">이 사람이 쳐져있으면 마음이 아프고, 나도 모르게 안아주고 싶어진다</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">헤어지지도 않았는데 그 사람이 그리워지고, 슬퍼질 때가 있다</div>
+          <div class="check-sub">헤어짐을 상상하면 너무 후회할 것 같아서, 지금 더 사랑을 주고 싶어진다</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">잘해준 것보다 못해준 것만 자꾸 떠오른다</div>
+          <div class="check-sub">이 사람한테 더 해주고 싶다는 마음이 계속 남아있다</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">그 사람이 힘들어하면 내 일처럼 가슴이 아프다</div>
+          <div class="check-sub">위로해줘야 한다는 생각보다, 그냥 내 아픔처럼 느껴진다</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="category">
+    <div class="section-header">
+      <span class="section-num">04 · 이 감정이 진짜일까?</span>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="why-block">
+      <div class="why-label">왜 중요하냐면</div>
+      <div class="why-text">이 감정들이 진짜인지 확인하는 마지막 질문이에요. 사람은 보통 <strong>행복하고, 기분이 좋을 때 관대해져요.</strong> 이게 유지될지를 진심으로 상상해봐요.</div>
+    </div>
+
+    <div class="checklist" id="list-4">
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">그 사람이 예민하거나, 별로인 모습을 보여도 마음이 안 식는다</div>
+          <div class="check-sub">컨디션 좋을 때만 좋은 게 아니라, 안 좋을 때도 여전히 이 사람이다</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCORE -->
+  <div class="score-wrap">
+    <div class="score-label">📊 진단 결과</div>
+    <div class="score-display" id="score-num">0</div>
+    <div class="score-total" id="score-total">/ 10개 중 해당 항목</div>
+    <div class="score-bar-bg">
+      <div class="score-bar-fill" id="score-bar"></div>
+    </div>
+
+    <div class="result-box" id="result-box">
+      <div class="result-title" id="result-title"></div>
+      <div class="result-desc" id="result-desc"></div>
+      <div class="result-insight">
+        <p id="result-insight"></p>
+      </div>
+      <button class="reset-btn" onclick="resetAll()">↺ 다시 체크하기</button>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <div class="summary-eyebrow">💬 피노의 한 줄</div>
+    <div class="summary-title">설레는 사람은 많아요.<br>근데 <em>애틋해지는 사람은 드물어요.</em></div>
+
+    <div class="conclusion">
+      <div class="conclusion-label">기억해요</div>
+      <p>
+        약한 부분까지 품고 싶어지는 사람,<br>
+        헤어지지도 않았는데 그리운 사람.<br><br>
+        <strong>그 사람 놓치면 진짜 땅을 치고 후회해요.</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    ※ 이 체크리스트는 절대적인 기준이 아니에요. 감정은 사람마다 다르게 나타날 수 있어요. 다만 지금 내 마음이 어디쯤 와 있는지 한 번쯤 돌아보는 계기가 됐으면 해요.
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">
+      끌리는 대로 말고, 제대로 — <strong>피노 @its_.pino</strong><br>
+      © 2026 Dear Soul Map · 피노 @its.pino<br>
+      이 콘텐츠의 무단 복제 및 재배포를 금지합니다.
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const results = [
+    {
+      max: 2,
+      title: "아직은 설렘 단계예요.",
+      desc: "지금은 도파민이 만드는 설렘 단계일 수 있어요. 나쁜 게 아니에요. 다만 애틋함까지 가려면 조금 더 시간이 필요해요.",
+      insight: "설렘이 <strong>애틋함</strong>으로 넘어가는지 지켜봐요. 그게 진짜를 가르는 기준이에요."
+    },
+    {
+      max: 5,
+      title: "애틋함이 조금씩 자라고 있어요.",
+      desc: "몇 가지가 해당됐어요. 이 사람한테 마음이 깊어지고 있다는 신호예요. 이 감정이 다른 사람한테는 안 생기는 감정인지 한 번 더 확인해봐요.",
+      insight: "선택적으로 관대해지는 사람, <strong>흔치 않아요.</strong>"
+    },
+    {
+      max: 8,
+      title: "이미 애틋해진 상태예요.",
+      desc: "많은 항목이 해당됐어요. 이건 단순한 호감이 아니에요. 이 사람의 약한 부분까지 품기로 한 거예요. 이런 감정, 아무한테나 안 생겨요.",
+      insight: "설렘은 식어도 <strong>애틋함은 잘 안 식어요.</strong> 그게 이 감정이 특별한 이유예요."
+    },
+    {
+      max: 10,
+      title: "이 사람, 놓치면 진짜 후회해요.",
+      desc: "거의 모든 항목이 해당됐어요. 이건 도파민이 아니라 옥시토신이 만드는 감정이에요. 이 사람의 약점까지 안고 싶고, 미리 그리운 사람. 이런 사람은 흔하지 않아요.",
+      insight: "설레는 사람은 많아요. 근데 애틋해지는 사람은 드물어요. <strong>이 사람, 절대 당연하게 여기지 마세요.</strong>"
+    }
+  ];
+
+  function toggle(el) {
+    el.classList.toggle('checked');
+    updateScore();
+  }
+
+  function updateScore() {
+    const all = document.querySelectorAll('.check-item');
+    const checked = document.querySelectorAll('.check-item.checked');
+    const count = checked.length;
+    const total = all.length;
+
+    document.getElementById('score-num').textContent = count;
+    document.getElementById('score-total').textContent = `/ ${total}개 중 해당 항목`;
+    document.getElementById('score-bar').style.width = `${(count / total) * 100}%`;
+
+    let chosen = results[results.length - 1];
+    for (const r of results) {
+      if (count <= r.max) { chosen = r; break; }
+    }
+
+    document.getElementById('result-title').textContent = chosen.title;
+    document.getElementById('result-desc').textContent = chosen.desc;
+    document.getElementById('result-insight').innerHTML = chosen.insight;
+    document.getElementById('result-box').classList.add('visible');
+  }
+
+  function resetAll() {
+    document.querySelectorAll('.check-item').forEach(el => el.classList.remove('checked'));
+    document.getElementById('score-num').textContent = '0';
+    document.getElementById('score-bar').style.width = '0%';
+    document.getElementById('result-box').classList.remove('visible');
+  }
+</script>
+</body>
+</html>
