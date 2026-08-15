@@ -195,8 +195,49 @@
       text-decoration: none;
     }
 
-    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
+    .feature-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 260px;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .flow-line {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      border-color: rgba(155,111,214,.42);
+    }
+
+    .flow-horizontal {
+      left: 25%;
+      width: 50%;
+      height: 2px;
+      border: 0;
+      background: rgba(155,111,214,.42);
+    }
+
+    .flow-turn {
+      left: 25%;
+      width: 50%;
+      height: 275px;
+      border-top: 0;
+      border-right: 2px solid rgba(155,111,214,.42);
+      border-bottom: 2px solid rgba(155,111,214,.42);
+    }
+
+    .flow-one { top: 130px; }
+    .flow-two { top: 130px; }
+    .flow-three { top: 405px; }
+    .flow-four { top: 405px; }
+    .flow-five { top: 680px; }
+
     .feature {
+      position: relative;
+      z-index: 1;
+      height: 100%;
       padding: 27px;
       border: 1px solid var(--line);
       border-radius: 20px;
@@ -214,8 +255,8 @@
       background: var(--purple-soft);
       font-size: 20px;
     }
-    .feature:nth-child(2n) .icon { background: var(--pink-soft); }
-    .feature:nth-child(3n) .icon { background: #fff0d5; }
+    .feature:nth-of-type(2n) .icon { background: var(--pink-soft); }
+    .feature:nth-of-type(3n) .icon { background: #fff0d5; }
     .kicker { color: #8f63c8; font-size: 12px; font-weight: 700; }
     .feature h3 { margin: 6px 0 9px; }
     .feature p { margin: 0; color: var(--muted); font-size: 13.5px; }
@@ -294,7 +335,31 @@
       .first, .feedback { padding: 28px 22px; border-radius: 21px; }
       .section { padding-top: 48px; }
       .install-card, .feature { padding: 23px 20px; }
-      .feature-grid { grid-template-columns: 1fr; }
+      .feature-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+      }
+      .feature-grid::before {
+        content: '';
+        position: absolute;
+        z-index: 0;
+        top: 44px;
+        bottom: 44px;
+        left: 28px;
+        width: 2px;
+        background: rgba(155,111,214,.42);
+      }
+      .flow-line { display: none; }
+      .feature {
+        height: auto;
+        min-height: 178px;
+        padding: 23px 20px 23px 78px;
+      }
+      .feature .icon {
+        position: absolute;
+        top: 23px;
+        left: 20px;
+      }
       .report { grid-template-columns: 1fr; padding: 23px 20px; }
     }
   </style>
@@ -310,9 +375,8 @@
       <div class="label">WELCOME TO SHERPA</div>
       <h1 class="heading">셰르파, <span>편하게 둘러보세요</span></h1>
       <p>
-        연애 고민을 이야기하고, 내 감정과 관계 습관을 기록하면서
-        나에게 맞는 관계 기준을 찾아가는 앱이에요. 정해진 순서 없이
-        지금 마음에 가까운 기능부터 사용해 주세요.
+        연애 고민과 궁금증을 이야기하고, 내 감정과 관계 습관을 기록하면서
+        나에게 맞는 관계 기준과 연애 목표를 찾아가는 앱이에요. 아래 순서대로 앱을 이용해주세요!
       </p>
     </section>
 
@@ -361,15 +425,21 @@
     <section class="section" id="features">
       <div class="label">CHOOSE YOUR MOMENT</div>
       <h2>지금 마음에 가까운 기능을 골라보세요</h2>
-      <p class="section-copy">모든 기능을 다 사용할 필요는 없어요. 지금 겪고 있는 상황에 맞춰 선택해 보세요.</p>
+      <p class="section-copy">추천 흐름은 선으로 이어두었어요. 처음이라면 따라가 보고, 필요한 기능만 골라도 괜찮아요.</p>
 
       <div class="feature-grid">
+        <span class="flow-line flow-horizontal flow-one" aria-hidden="true"></span>
+        <span class="flow-line flow-turn flow-two" aria-hidden="true"></span>
+        <span class="flow-line flow-horizontal flow-three" aria-hidden="true"></span>
+        <span class="flow-line flow-turn flow-four" aria-hidden="true"></span>
+        <span class="flow-line flow-horizontal flow-five" aria-hidden="true"></span>
+
+        <article class="feature"><div class="icon">🔍</div><div class="kicker">내 연애 성향이 궁금할 때</div><h3>블랙박스 테스트</h3><p>관계에서 무엇에 끌리고 어떻게 반응하는지 확인할 수 있어요.</p><span class="condition">처음 한 번 추천</span></article>
         <article class="feature"><div class="icon">💬</div><div class="kicker">고민을 바로 이야기하고 싶을 때</div><h3>연애상담</h3><p>썸, 연애, 이별, 연락 문제처럼 마음에 걸리는 일을 편하게 이야기해 보세요.</p></article>
         <article class="feature"><div class="icon">🧭</div><div class="kicker">우리 관계를 정리해 보고 싶을 때</div><h3>관계진단</h3><p>상대방과 나의 상황을 바탕으로 현재 관계와 반복되는 문제를 살펴볼 수 있어요.</p></article>
-        <article class="feature"><div class="icon">✍️</div><div class="kicker">하루 3분, 내 마음을 기록할 때</div><h3>오늘의 질문</h3><p>매일 하나의 질문에 답하면서 내 감정과 관계 기준을 기록해요.</p><span class="condition">하루 1개 · 5개 후 리포트</span></article>
+        <article class="feature"><div class="icon">✍️</div><div class="kicker">하루 3분, 내 마음을 기록할 때</div><h3>오늘의 질문</h3><p>매일 하나의 질문에 답하면서 내 감정을 기록하고, 연애 목표에 다가갈 수 있어요.</p><span class="condition">하루 1개 · 5개 후 리포트</span></article>
         <article class="feature"><div class="icon">🎯</div><div class="kicker">연애 상황에서 판단을 연습할 때</div><h3>연애퀴즈</h3><p>여러 연애 상황에서 선택해 보고, 해설을 통해 다른 관점도 살펴볼 수 있어요.</p></article>
         <article class="feature"><div class="icon">📓</div><div class="kicker">오늘의 상담을 기록하고 싶을 때</div><h3>성장일기</h3><p>상담에서 알게 된 감정이나 오늘 해보고 싶은 행동을 짧게 남겨보세요.</p><span class="condition">상담 5회 후 열려요</span></article>
-        <article class="feature"><div class="icon">🔍</div><div class="kicker">내 연애 성향이 궁금할 때</div><h3>블랙박스 테스트</h3><p>관계에서 무엇에 끌리고 어떻게 반응하는지 확인할 수 있어요.</p><span class="condition">처음 한 번 추천</span></article>
       </div>
     </section>
 
